@@ -12,9 +12,9 @@ int main() {
 	FillWordsTxt();
 	FillHintsTxt();
 	MenuGreenText(h, 0, 0, int(Colors::GREEN)); // явное преобразование в int т.к. Colors содержит целосленные КОНСТАНТЫ
-	//MenuEvent(h, word, false, int(Colors::RED), int(Colors::GREEN));
+	MenuEvent(h, word, false, int(Colors::RED), int(Colors::GREEN));
 	system("cls"); // очистка экрана
-	//Loading(h, int(Colors::GREEN));
+	Loading(h, int(Colors::GREEN));
 	CreateWord(word);
 	CountLetters(word);
 	Frame(h, word, 10, 35);

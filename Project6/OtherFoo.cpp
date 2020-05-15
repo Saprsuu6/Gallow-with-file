@@ -7,6 +7,7 @@
 #include "Header.h"
 
 void Setings(const HANDLE& h, const HWND& hwnd) {
+    setlocale(0, "C");
     system("mode con cols=70 lines=25"); // настройка размеров окна консоли
     SetConsoleTextAttribute(h, 10); // настройка главного цвета
     system("title Gallow"); // название окна консоли
@@ -191,6 +192,7 @@ void Frame(const HANDLE& h, const Word& word, int hight, int width) {
 
 // функция печати 
 void GameplayPrint(const HANDLE& h, const Word& word, int width) {
+    Hints hint;
     COORD c{ 1,3 };
     SetConsoleCursorPosition(h, c);
     cout << "Enter latter:" << char(26) << " " << char(27); // между стрелочек будет писаться буква
@@ -201,6 +203,12 @@ void GameplayPrint(const HANDLE& h, const Word& word, int width) {
         cout << ":)"; // для красоты)
         c.X += 2;
     }
+    char* temp = new char[1000];
+    c.X = 0;
+    c.Y += 2;
+    //OemToAnsi(hint._str, temp);
+    SetConsoleCursorPosition(h, c);
+    cout << temp;
 }
 
 // функция самого геймплея
