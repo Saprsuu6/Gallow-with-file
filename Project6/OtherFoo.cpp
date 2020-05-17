@@ -7,7 +7,6 @@
 #include "Header.h"
 
 void Setings(const HANDLE& h, const HWND& hwnd) {
-    setlocale(0, "C");
     system("mode con cols=70 lines=25"); // настройка размеров окна консоли
     SetConsoleTextAttribute(h, 10); // настройка главного цвета
     system("title Gallow"); // название окна консоли
@@ -41,7 +40,7 @@ void MenuRedText(const HANDLE& h, string str, int x, int y, int color) {
 void Exit() {
     int message = MessageBoxA(0, "Do you realy to exit?", "", MB_YESNO);
     if (message == IDYES)
-        system("taskkill /im Gallow.exe");
+        system("taskkill /im Gallow(edition).exe");
     else
         main();
 }
@@ -119,10 +118,8 @@ void FillHintsTxt() {
 }
 
 // word. доступ переменноый структуры через объект типа структуры
-void CreateWord(Word& word) { // ввод символов из 12 доступных
-    Words words;
-    Hints hints;
-    FILE* file = {};
+void CreateWord(Word& word, const Words words, Hints& hints) { // ввод символов из 12 доступных
+    FILE* file;
     int str = 0;
     char* temp_hint = new char[1000];
     char* temp_word = new char[100];
@@ -191,8 +188,7 @@ void Frame(const HANDLE& h, const Word& word, int hight, int width) {
 }
 
 // функция печати 
-void GameplayPrint(const HANDLE& h, const Word& word, int width) {
-    Hints hint;
+void GameplayPrint(const HANDLE& h, const Word& word, const Hints& hint,int width) {
     COORD c{ 1,3 };
     SetConsoleCursorPosition(h, c);
     cout << "Enter latter:" << char(26) << " " << char(27); // между стрелочек будет писаться буква
@@ -203,12 +199,11 @@ void GameplayPrint(const HANDLE& h, const Word& word, int width) {
         cout << ":)"; // для красоты)
         c.X += 2;
     }
-    char* temp = new char[1000];
     c.X = 0;
     c.Y += 2;
-    //OemToAnsi(hint._str, temp);
     SetConsoleCursorPosition(h, c);
-    cout << temp;
+    SetConsoleTextAttribute(h, 10);
+    cout << "Hint: " << hint._str;
 }
 
 // функция самого геймплея
